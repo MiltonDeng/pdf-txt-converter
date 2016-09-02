@@ -29,15 +29,14 @@ namespace PDFConverter
 
         private void btnGetFileInfo_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Test");
             pdf_manager = new PDFManager(tbPDFDir.Text, tbTXTDir.Text);
 
-            dgPDFState.ItemsSource = pdf_manager.pdf_files;
+            dgPDFState.ItemsSource = pdf_manager.pdfs;
         }
 
         private void btnStartProcess_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("test");
+            pdf_manager.StartProcess();
         }
     }
 }
