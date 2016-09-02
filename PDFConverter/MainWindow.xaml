@@ -1,10 +1,10 @@
 ﻿<Window x:Class="PDFConverter.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PDF to TXT Converter" Height="350" Width="525" ResizeMode="NoResize">
+        Title="PDF to TXT Converter" Height="400" Width="650" Background="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}">
     <Grid>
         <DockPanel>
-            <Menu DockPanel.Dock="Top" VerticalAlignment="Top">
+            <Menu DockPanel.Dock="Top" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
                 <MenuItem Header="About"></MenuItem>
                 <MenuItem Header="Exit"></MenuItem>
             </Menu>
@@ -21,11 +21,11 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="PDF Input Directory: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Txt Output Directory: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="4,4,20,4" VerticalAlignment="Center" />
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="4,4,20,4" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="TXT Output Directory: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox Name="tbPDFDir" Grid.Row="1" Grid.Column="1" Margin="4,4,20,4" VerticalAlignment="Center" />
+                <TextBox Name="tbTXTDir" Grid.Row="2" Grid.Column="1" Margin="4,4,20,4" VerticalAlignment="Center" />
             </Grid>
-            
+
             <Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"></RowDefinition>
@@ -43,12 +43,9 @@
                 <Button Grid.Row="1" Grid.Column="2" Content="Start Process" Margin="5"></Button>
             </Grid>
 
-            <Grid DockPanel.Dock="Top">
-                
-                <DataGrid Height="140" Margin="20, 5"></DataGrid>
-            </Grid>
-            
-            <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+            <DataGrid DockPanel.Dock="Top" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment = "Stretch"  VerticalScrollBarVisibility="Auto"></DataGrid>
+
+            <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
                 <TextBlock Text="Waiting"></TextBlock>
             </StatusBar>
         </DockPanel>
