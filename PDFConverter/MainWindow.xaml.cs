@@ -20,9 +20,24 @@ namespace PDFConverter
     /// </summary>
     public partial class MainWindow : Window
     {
+        PDFManager pdf_manager;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnGetFileInfo_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Test");
+            pdf_manager = new PDFManager(tbPDFDir.Text, tbTXTDir.Text);
+
+            dgPDFState.ItemsSource = pdf_manager.pdf_files;
+        }
+
+        private void btnStartProcess_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("test");
         }
     }
 }
