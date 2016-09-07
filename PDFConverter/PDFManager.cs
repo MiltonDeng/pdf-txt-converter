@@ -87,10 +87,14 @@ namespace PDFConverter
         private string txt_dir;
         public List<PDF> pdfs;
 
-        public PDFManager(string pdf_dir, string txt_dir)
+        public BackgroundWorker worker;
+
+        public PDFManager(string pdf_dir, string txt_dir, BackgroundWorker worker)
         {
             this.pdf_dir = pdf_dir;
             this.txt_dir = txt_dir;
+            this.worker = worker;
+
             pdfs = new List<PDF>();
 
             string[] pdf_paths = Directory.GetFiles(pdf_dir);
@@ -109,12 +113,16 @@ namespace PDFConverter
 
         public void StartProcess()
         {
-            foreach (PDF pdf in pdfs)
+            int file_number = pdfs.Count;
+
+            for (int i = 0; i < file_number; i++)
             {
-                string dest_path = txt_dir + "\\" + Path.GetFileNameWithoutExtension(pdf.FilePath) + ".txt";
-                pdf.CopyOut(dest_path);
+                PDF pdf_now = pdfs[i];
+                string dest_path = txt_dir + "\\" + Path.GetFileNameWithoutExtension(pdf_now.FilePath) + ".txt";
+                pdf_now.CopyOut(dest_path);
+                pdf_now.State = true;
+                worker.ReportProgress(100 * (i + 1) / file_number);
             }
         }
-
     }
 }

@@ -38,12 +38,12 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <ProgressBar Name="pbProgressBar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,5"></ProgressBar>
+                <ProgressBar x:Name="pbProgress" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,5"></ProgressBar>
                 <Button Name="btnGetFileInfo" Grid.Row="1" Grid.Column="1" Content="Get File Info" Margin="5" Click="btnGetFileInfo_Click"/>
-                <Button Name="btnStartProcess" Grid.Row="1" Grid.Column="2" Content="Start Process" Margin="5" Click="btnStartProcess_Click"/>
+                <Button Name="btnStartProcess" Grid.Row="1" Grid.Column="2" Content="Start Process" Margin="5" Click="btnStartProcess_Click" IsEnabled="False"/>
             </Grid>
 
-            <DataGrid Name="dgPDFState" DockPanel.Dock="Top" Height ="400" Margin="0,0,0,0" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Stretch" VerticalAlignment = "Stretch"  VerticalScrollBarVisibility="Auto">
+            <DataGrid Name="dgPDFState" IsReadOnly="True" DockPanel.Dock="Top" Height ="400" Margin="0,0,0,0" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Stretch" VerticalAlignment = "Stretch"  VerticalScrollBarVisibility="Auto">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Width="auto" Binding="{Binding State}" Header="State"></DataGridCheckBoxColumn>
                     <DataGridTextColumn Width="auto" Binding="{Binding PageNumber}" Header="Page Number"></DataGridTextColumn>
@@ -55,6 +55,5 @@
                 <TextBlock Name="tbStatus" Text="Waiting"></TextBlock>
             </StatusBar>
         </DockPanel>
-
     </Grid>
 </Window>
