@@ -15,22 +15,22 @@ namespace PDFConverter
         public string FilePath { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private bool state;
+        private string status;
         private int page_number;
-
-        public bool State
+        
+        public string Status
         {
             get 
             {
-                return this.state;
+                return this.status;
             }
             
             set
             {
-                this.state = value;
+                this.status = value;
                 if (PropertyChanged != null)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs("State"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("Status"));
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace PDFConverter
         public PDF(string file_path) 
         {
             this.FilePath = file_path;
-            this.State = false;
+            this.Status = "Waiting";
             this.PageNumber = 0;
         }
 
@@ -117,11 +117,22 @@ namespace PDFConverter
 
             for (int i = 0; i < file_number; i++)
             {
-                PDF pdf_now = pdfs[i];
-                string dest_path = txt_dir + "\\" + Path.GetFileNameWithoutExtension(pdf_now.FilePath) + ".txt";
-                pdf_now.CopyOut(dest_path);
-                pdf_now.State = true;
-                worker.ReportProgress(100 * (i + 1) / file_number);
+                // PDF pdf_now = pdfs[i];
+                string dest_path = txt_dir + "\\" + Path.GetFileNameWithoutExtension(pdfs[i].FilePath) + ".txt";
+
+                try
+                {
+                    pdfs[i].CopyOut(dest_path);
+                    pdfs[i].Status = "Sucess";
+                }
+                catch
+                {
+                    pdfs[i].Status = "Failed";
+                }
+                finally
+                {
+                    worker.ReportProgress(100 * (i + 1) / file_number);
+                }
             }
         }
     }

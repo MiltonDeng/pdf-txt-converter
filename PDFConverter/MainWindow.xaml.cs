@@ -38,8 +38,14 @@ namespace PDFConverter
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            pdf_manager.StartProcess();
-
+            try
+            {
+                pdf_manager.StartProcess();
+            }
+            catch (Exception ex)
+            {   
+                MessageBox.Show(ex.Message + "\n-----------------------------------------------------------------\nDetails: \n" + ex, "Error Found");
+            }
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
